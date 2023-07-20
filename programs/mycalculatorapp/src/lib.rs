@@ -19,6 +19,12 @@ pub mod mycalculatorapp {
         calculator.result = num1 + num2;
         Ok(())
     }
+
+    pub fn mult(ctx: Context<Multiple>, num1: i64, num2: i64) -> ProgramResult {
+        let calculator = &mut ctx.accounts.calculator;
+        calculator.result = num1 * num2;
+        Ok(())
+    }
 }
 
 
@@ -34,6 +40,12 @@ pub struct Create<'info> {
 
 #[derive(Accounts)]
 pub struct Additional<'info> {
+    #[account(mut)]
+    pub calculator: Account<'info, Calculator>
+}
+
+#[derive(Accounts)]
+pub struct Multiple<'info> {
     #[account(mut)]
     pub calculator: Account<'info, Calculator>
 }

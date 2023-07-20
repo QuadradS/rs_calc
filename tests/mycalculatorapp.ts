@@ -39,4 +39,16 @@ describe('my_calc_app', () => {
     assert.ok(account.result.eq(new BN(30)))
   })
 
+  it('Multiple function', async () =>{
+    await program.rpc.mult(new BN(10), new BN(10), {
+      accounts: {
+        calculator: calculator.publicKey,
+      }
+    })
+
+    const account = await program.account.calculator.fetch(calculator.publicKey);
+
+    assert.ok(account.result.eq(new BN(100)))
+  })
+
 })
